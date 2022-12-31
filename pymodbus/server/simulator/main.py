@@ -114,13 +114,14 @@ def get_commandline():
     return cmd_args
 
 
-def main():
+async def main():
     """Run server."""
     cmd_args = get_commandline()
     task = ModbusSimulatorServer(**cmd_args)
 
-    asyncio.run(task.run_forever(), debug=True)
+    await task.run_forever()
+    _logger.debug("STOP")
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main(), debug=True)
